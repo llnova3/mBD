@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Majed — Gothic Greeting</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset & base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Cormorant Garamond", serif;
+      background:
+        radial-gradient(ellipse at 20% 10%, rgba(120,20,40,0.08) 0%, transparent 20%),
+        linear-gradient(180deg,#0b0810 0%, #08060a 55%, #050306 100%);
+      color:#f5efe6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+    }
+
+    /* Card */
+    .card{
+      width:min(980px, 95%);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));
+      border:1px solid rgba(255,255,255,0.03);
+      border-radius:14px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+      padding:36px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* Ornate header */
+    .header{
+      display:flex;
+      gap:20px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .crest{
+      width:90px;
+      height:90px;
+      flex:0 0 90px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), transparent 20%),
+        linear-gradient(180deg,#2b0b0b 0%, #12060a 100%);
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      border:2px solid rgba(255,255,255,0.04);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      position:relative;
+    }
+    .crest::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:50%;
+      background-image: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.02), transparent 20%);
+      pointer-events:none;
+    }
+    .crest .M{
+      font-family: "Cinzel", serif;
+      font-weight:900;
+      font-size:44px;
+      color:#f0d9c7;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.6), 0 0 8px rgba(160,20,40,0.05);
+      transform:translateY(1px);
+    }
+
+    h1{
+      margin:0;
+      font-family: "Cinzel", serif;
+      font-weight:700;
+      letter-spacing:2px;
+      font-size:34px;
+      color:#f6e9de;
+      text-shadow: 0 6px 24px rgba(0,0,0,0.8);
+    }
+    .sub{
+      color:#c4b7a9;
+      margin-top:6px;
+      font-size:15px;
+    }
+
+    /* main message area */
+    .content{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
+      margin-top:22px;
+    }
+
+    .message{
+      line-height:1.55;
+      font-size:18px;
+      padding:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.02);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .message p.lead{
+      font-family: "Cinzel", serif;
+      font-size:28px;
+      margin:0 0 8px 0;
+      color:#f8efe6;
+      letter-spacing:1px;
+    }
+    .message p.body{margin:0 0 12px 0;color:#e7d9cf}
+
+    /* right column: candle + card controls */
+    .side{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      align-items:center;
+    }
+
+    /* Candle visual */
+    .candle-wrap{
+      width:220px;
+      height:260px;
+      display:grid;
+      place-items:center;
+      position:relative;
+      transform:translateY(6px);
+    }
+
+    .candle{
+      width:64px;
+      height:160px;
+      background:linear-gradient(180deg,#2b0707,#5a1b1b 50%, #2b0707 100%);
+      border-radius:18px;
+      position:relative;
+      box-shadow: inset 0 6px 20px rgba(255,200,180,0.03), 0 8px 30px rgba(0,0,0,0.6);
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      overflow:visible;
+    }
+    .wax-drip{
+      position:absolute;
+      top:28px;
+      left:8px;
+      width:14px;height:34px;
+      background:rgba(250,230,220,0.06);
+      border-radius:8px;
+      transform:rotate(-8deg);
+      filter:blur(.2px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.6) inset;
+    }
+    .wick{
+      width:4px;height:10px;background:#2b1a18;border-radius:2px;margin-top:8px;position:relative;z-index:5;
+    }
+    .flame{
+      position:absolute;
+      top:-18px;
+      width:30px;height:30px;
+      display:grid;place-items:center;
+      pointer-events:none;
+      animation:flame-flicker 1.2s infinite;
+    }
+    .flame svg{filter: drop-shadow(0 8px 20px rgba(200,40,80,0.12));}
+    @keyframes flame-flicker{
+      0%{transform:translateY(0) rotate(0) scale(1)}
+      25%{transform:translateY(-2px) rotate(-1deg) scale(.98)}
+      50%{transform:translateY(0) rotate(1deg) scale(1.02)}
+      75%{transform:translateY(-1px) rotate(0deg) scale(.99)}
+      100%{transform:translateY(0) rotate(0) scale(1)}
+    }
+
+    /* Gothic footer flourish */
+    .flourish{
+      margin-top:18px;
+      width:100%;
+      height:56px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.01), transparent);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      color:#cbb9ac;
+      font-size:13px;
+    }
+
+    /* Bats (SVG) flying across */
+    .bat {
+      position:absolute;
+      top:18px;
+      right:6%;
+      width:140px;
+      opacity:0.08;
+      transform:translateY(-20px);
+      animation:bat-float 12s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes bat-float{
+      0%{transform:translateX(0) translateY(-6px) rotate(0) scale(.9); opacity:.06}
+      50%{transform:translateX(-30vw) translateY(12px) rotate(-6deg) scale(1.08); opacity:.12}
+      100%{transform:translateX(-60vw) translateY(-6px) rotate(0) scale(.95); opacity:.06}
+    }
+
+    /* Confetti-like falling roses (simple) */
+    .petal{
+      pointer-events:none;
+      position:absolute;
+      top:-20px;
+      left:10%;
+      width:12px;height:24px;
+      background:linear-gradient(180deg,#9b1f2b,#4b0710);
+      border-radius:6px 6px 4px 4px;
+      transform-origin:center;
+      opacity:0.9;
+      animation:petal-fall linear infinite;
+    }
+    @keyframes petal-fall{
+      0%{transform:translateY(-10vh) rotate(0) translateX(0); opacity:0}
+      10%{opacity:1}
+      100%{transform:translateY(120vh) rotate(720deg) translateX(40vw); opacity:0.02}
+    }
+
+    /* Buttons */
+    .controls{display:flex;gap:10px}
+    .btn{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));
+      color:#efe6dd;
+      border:1px solid rgba(255,255,255,0.03);
+      padding:10px 14px;
+      border-radius:8px;
+      cursor:pointer;
+      font-family:inherit;
+      font-size:14px;
+      transition:transform .12s ease, box-shadow .12s;
+    }
+    .btn:hover{transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.5)}
+    .btn.secondary{background:transparent;border:1px dashed rgba(255,255,255,0.03); color:#d7c7bb}
+
+    /* Responsive */
+    @media (max-width:880px){
+      .content{grid-template-columns:1fr; padding-bottom:8px}
+      .side{flex-direction:row;justify-content:space-between; width:100%}
+      .candle-wrap{width:160px;height:200px}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" role="main" aria-label="Gothic birthday greeting for Majed">
+    <div class="bat" aria-hidden="true">
+      <!-- SVG stylized bat -->
+      <svg width="140" height="60" viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 60 C40 20, 80 20, 110 60 C140 20, 180 20, 220 60 C220 40, 240 20, 280 10 L260 70 C210 40, 170 80, 140 90 C110 100, 70 80, 40 90 C10 100, -10 80, 0 60Z" fill="#000000"/>
+      </svg>
+    </div>
+
+    <div class="header">
+      <div class="crest" aria-hidden="true"><div class="M">M</div></div>
+      <div>
+        <h1>Happy Birthday Majed!</h1>
+        <div class="sub">To Majed — on your special night</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="message" id="messageArea">
+        <p class="lead">Welcome to 22!</p>
+        <p class="body"> Happy Birthday to the one who makes my world brighter just by being in it. Your smile, your kindness, and the way you care mean more to me than words can ever fully say. I hope today brings you all the happiness you bring to everyone around you. You deserve a day full of love, laughter, and everything that makes you feel special.</p>
+
+        <p style="margin-top:14px;color:#d9c9bf;font-size:15px">
+          With respect and celebration,<br>
+          <strong style="font-family:'Cinzel',serif;color:#f7eadf">Fawaghi :D</strong>
+        </p>
+      </div>
+
+      <aside class="side" aria-hidden="false">
+        <div class="candle-wrap" aria-hidden="true">
+          <div class="candle" aria-hidden="true">
+            <div class="wax-drip"></div>
+            <div class="wick"></div>
+            <div class="flame" aria-hidden="true">
+              <!-- flame SVG -->
+              <svg viewBox="0 0 32 32" width="30" height="30" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="g1" cx="50%" cy="30%">
+                    <stop offset="0%" stop-color="#ffd48b"/>
+                    <stop offset="55%" stop-color="#ff8b5c"/>
+                    <stop offset="100%" stop-color="#c93a2a"/>
+                  </radialGradient>
+                </defs>
+                <path d="M16 2 C20.5 8,22 11,21 15 C20 18,17 20,16 22 C15 20,12 18,11 15 C10 11,11.5 8,16 2 Z" fill="url(#g1)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+ 
+
+        <div class="flourish">✨ I love you ✨</div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Small JS for interactions and petals -->
+  <script>
+    // Create falling petals (a few elements with random delays)
+    (function createPetals(){
+      const COUNT = 14;
+      const body = document.body;
+      for (let i=0;i<COUNT;i++){
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.style.left = Math.random()*90 + '%';
+        petal.style.width = (8 + Math.random()*12) + 'px';
+        petal.style.height = (12 + Math.random()*28) + 'px';
+        const delay = Math.random()*6;
+        const duration = 8 + Math.random()*10;
+        petal.style.animationDelay = delay + 's';
+        petal.style.animationDuration = duration + 's';
+        petal.style.borderRadius = (4 + Math.random()*8) + 'px';
+        petal.style.background = `linear-gradient(180deg, rgba(155,31,43,${0.9 - Math.random()*0.3}), rgba(70,10,15,0.95))`;
+        petal.style.opacity = 0.9 - Math.random()*0.5;
+        body.appendChild(petal);
+      }
+    })();
+
+    // Personalize text
+    document.getElementById('changeTextBtn').addEventListener('click', function(){
+      const newText = prompt("Enter the main message for Majed:", "Happy Birthday, Majed — may your night be legendary.");
+      if (newText !== null){
+        const lead = document.querySelector('.message p.lead');
+        lead.textContent = newText;
+      }
+    });
+
+    // Toggle accent theme (switch hue slightly)
+    let accentOn = false;
+    document.getElementById('toggleThemeBtn').addEventListener('click', function(){
+      accentOn = !accentOn;
+      if (accentOn){
+        document.documentElement.style.setProperty('--accent','crimson');
+        document.body.style.background = 'linear-gradient(180deg,#0b0610 0%, #0b0510 60%, #050104 100%)';
+        alert('Accent enabled: slightly redder mood.');
+      } else {
+        document.body.style.background = 'linear-gradient(180deg,#0b0810 0%, #08060a 55%, #050306 100%)';
+      }
+    });
+
+    // Accessibility: focus outline show on keyboard navigation
+    document.body.addEventListener('keydown', function(e){
+      if (e.key === 'Tab') document.body.classList.add('show-focus');
+    });
+
+    // Optional: gentle glow on crest when loaded
+    window.addEventListener('load', function(){
+      const crest = document.querySelector('.crest');
+      crest.animate([
+        {boxShadow: '0 6px 20px rgba(0,0,0,0.6)'},
+        {boxShadow: '0 16px 40px rgba(150,40,60,0.18)'}
+      ], {duration:1200, easing:'ease-in-out'});
+    });
+  </script>
+</body>
+</html>
